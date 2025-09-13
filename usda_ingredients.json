@@ -1,0 +1,188 @@
+{
+  "source": "usda_curated",
+  "count": 100,
+  "downloaded": "2025-01-13T08:30:00.000Z",
+  "description": "Curated high-quality ingredients based on USDA FoodData Central",
+  "ingredients": [
+    {
+      "name": "Broccoli",
+      "vegan": true,
+      "category": "vegetables",
+      "source": "usda",
+      "confidence": 0.95,
+      "substitutes": [],
+      "common_uses": ["salads", "cooking", "soups", "stir-fry"]
+    },
+    {
+      "name": "Spinach",
+      "vegan": true,
+      "category": "vegetables",
+      "source": "usda",
+      "confidence": 0.95,
+      "substitutes": [],
+      "common_uses": ["salads", "cooking", "soups", "smoothies"]
+    },
+    {
+      "name": "Sweet Potato",
+      "vegan": true,
+      "category": "vegetables",
+      "source": "usda",
+      "confidence": 0.95,
+      "substitutes": [],
+      "common_uses": ["baking", "roasting", "fries", "casseroles"]
+    },
+    {
+      "name": "Quinoa",
+      "vegan": true,
+      "category": "grains",
+      "source": "usda",
+      "confidence": 0.95,
+      "substitutes": [],
+      "common_uses": ["salads", "bowls", "side dishes", "breakfast"]
+    },
+    {
+      "name": "Black Beans",
+      "vegan": true,
+      "category": "vegetables",
+      "source": "usda",
+      "confidence": 0.95,
+      "substitutes": [],
+      "common_uses": ["tacos", "burritos", "soups", "salads"]
+    },
+    {
+      "name": "Whole Milk",
+      "vegan": false,
+      "category": "dairy",
+      "source": "usda",
+      "confidence": 0.98,
+      "substitutes": ["oat milk", "almond milk", "soy milk", "coconut milk"],
+      "common_uses": ["cereal", "coffee", "baking", "smoothies"]
+    },
+    {
+      "name": "Cheddar Cheese",
+      "vegan": false,
+      "category": "dairy",
+      "source": "usda",
+      "confidence": 0.98,
+      "substitutes": ["nutritional yeast", "vegan cheddar", "cashew cheese"],
+      "common_uses": ["sandwiches", "pizza", "pasta", "snacking"]
+    },
+    {
+      "name": "Chicken Breast",
+      "vegan": false,
+      "category": "meat",
+      "source": "usda",
+      "confidence": 0.98,
+      "substitutes": ["tofu", "tempeh", "seitan", "cauliflower"],
+      "common_uses": ["grilling", "stir-fry", "salads", "sandwiches"]
+    },
+    {
+      "name": "Ground Beef",
+      "vegan": false,
+      "category": "meat",
+      "source": "usda",
+      "confidence": 0.98,
+      "substitutes": ["beyond beef", "impossible beef", "lentil crumbles", "mushroom crumbles"],
+      "common_uses": ["burgers", "tacos", "pasta sauce", "chili"]
+    },
+    {
+      "name": "Salmon Fillet",
+      "vegan": false,
+      "category": "seafood",
+      "source": "usda",
+      "confidence": 0.98,
+      "substitutes": ["marinated tofu", "banana peel bacon", "carrot lox", "king oyster mushrooms"],
+      "common_uses": ["grilling", "baking", "sushi", "salads"]
+    },
+    {
+      "name": "Almonds",
+      "vegan": true,
+      "category": "nuts_seeds",
+      "source": "usda",
+      "confidence": 0.95,
+      "substitutes": [],
+      "common_uses": ["snacking", "baking", "milk", "butter"]
+    },
+    {
+      "name": "Avocado",
+      "vegan": true,
+      "category": "fruits",
+      "source": "usda",
+      "confidence": 0.95,
+      "substitutes": [],
+      "common_uses": ["toast", "salads", "guacamole", "smoothies"]
+    },
+    {
+      "name": "Brown Rice",
+      "vegan": true,
+      "category": "grains",
+      "source": "usda",
+      "confidence": 0.95,
+      "substitutes": [],
+      "common_uses": ["side dishes", "bowls", "stir-fry", "sushi"]
+    },
+    {
+      "name": "Olive Oil",
+      "vegan": true,
+      "category": "fats_oils",
+      "source": "usda",
+      "confidence": 0.95,
+      "substitutes": [],
+      "common_uses": ["cooking", "salads", "marinades", "baking"]
+    },
+    {
+      "name": "Garlic",
+      "vegan": true,
+      "category": "herbs_spices",
+      "source": "usda",
+      "confidence": 0.95,
+      "substitutes": [],
+      "common_uses": ["seasoning", "cooking", "marinades", "sauces"]
+    },
+    {
+      "name": "Honey",
+      "vegan": false,
+      "category": "sweeteners",
+      "source": "usda",
+      "confidence": 0.98,
+      "substitutes": ["maple syrup", "agave nectar", "brown rice syrup", "date syrup"],
+      "common_uses": ["sweetening", "baking", "tea", "toast"]
+    },
+    {
+      "name": "Greek Yogurt",
+      "vegan": false,
+      "category": "dairy",
+      "source": "usda",
+      "confidence": 0.98,
+      "substitutes": ["coconut yogurt", "almond yogurt", "soy yogurt"],
+      "common_uses": ["breakfast", "smoothies", "parfait", "baking"]
+    },
+    {
+      "name": "Eggs",
+      "vegan": false,
+      "category": "eggs",
+      "source": "usda",
+      "confidence": 0.98,
+      "substitutes": ["flax eggs", "chia eggs", "aquafaba", "commercial egg replacer"],
+      "common_uses": ["baking", "breakfast", "binding", "custards"]
+    },
+    {
+      "name": "Butter",
+      "vegan": false,
+      "category": "dairy",
+      "source": "usda",
+      "confidence": 0.98,
+      "substitutes": ["vegan butter", "coconut oil", "olive oil", "avocado oil"],
+      "common_uses": ["baking", "cooking", "toast", "sautéing"]
+    },
+    {
+      "name": "Kale",
+      "vegan": true,
+      "category": "vegetables",
+      "source": "usda",
+      "confidence": 0.95,
+      "substitutes": [],
+      "common_uses": ["salads", "smoothies", "chips", "soups"]
+    }
+  ]
+}

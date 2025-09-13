@@ -13,6 +13,7 @@ const bodyParser = require('body-parser');
 const VwapDatabase = require('./database');
 const IngredientParser = require('./ingredient-parser');
 const RecipeVeganizer = require('./recipe-veganizer');
+const RecipeExtractor = require('./recipe-extractor');
 
 class VwapServer {
   constructor() {
@@ -20,6 +21,7 @@ class VwapServer {
     this.port = process.env.PORT || 3001;
     this.database = new VwapDatabase();
     this.parser = new IngredientParser();
+    this.extractor = new RecipeExtractor();
     this.veganizer = null; // Will be initialized after database
     
     this.setupMiddleware();
@@ -69,12 +71,12 @@ class VwapServer {
     // Main veganize endpoint
     this.app.post('/api/veganize', async (req, res) => {
       try {
-        const { recipe } = req.body;
+        let { recipe } = req.body;
         
         if (!recipe || typeof recipe !== 'string') {
           return res.status(400).json({
             error: 'Recipe text is required',
-            message: 'Please provide a recipe as a string in the request body'
+            message: 'Please provide a recipe as a string or URL in the request body'
           });
         }
 
@@ -85,11 +87,53 @@ class VwapServer {
           });
         }
 
+        let originalInput = recipe;
+        let extractedFromUrl = false;
+
+        // Check if input is a URL and extract recipe if needed
+        if (this.extractor.isValidURL(recipe)) {
+          console.log(`🔍 Detected URL input: ${recipe}`);
+          try {
+            const extractionResult = await this.extractor.extractFromURL(recipe);
+            
+            if (extractionResult && extractionResult.text && extractionResult.text.length > 50) {
+              recipe = extractionResult.text;
+              extractedFromUrl = true;
+              console.log(`✅ Successfully extracted recipe from URL (${recipe.length} characters)`);
+            } else {
+              return res.status(400).json({
+                error: 'Recipe extraction failed',
+                message: 'Unable to extract sufficient recipe content from the provided URL',
+                url: originalInput
+              });
+            }
+          } catch (extractionError) {
+            console.error('❌ Error extracting recipe from URL:', extractionError);
+            return res.status(400).json({
+              error: 'URL processing failed',
+              message: extractionError.message || 'Failed to extract recipe from URL',
+              url: originalInput
+            });
+          }
+        }
+
+        // Validate extracted or provided recipe text
+        if (!recipe || recipe.trim().length < 10) {
+          return res.status(400).json({
+            error: 'Invalid recipe content',
+            message: extractedFromUrl 
+              ? 'The extracted recipe text is too short or empty'
+              : 'Recipe text must be at least 10 characters long'
+          });
+        }
+
         const result = await this.veganizer.veganizeRecipe(recipe);
         
         res.json({
           success: true,
-          original_recipe: recipe,
+          source: extractedFromUrl ? 'url' : 'text',
+          original_input: originalInput,
+          extracted_recipe: extractedFromUrl ? recipe : null,
           veganized_recipe: result.veganizedRecipe,
           substitutions: result.substitutions,
           stats: {
@@ -118,7 +162,8 @@ class VwapServer {
           limit = 50,
           category = null,
           vegan = null,
-          search = null
+          search = null,
+          source = null
         } = req.query;
 
         const options = {
@@ -126,7 +171,8 @@ class VwapServer {
           limit: Math.min(parseInt(limit), 100), // Max 100 per page
           category,
           vegan: vegan === 'true' ? true : vegan === 'false' ? false : null,
-          search
+          search,
+          source
         };
 
         const result = await this.database.getIngredients(options);
@@ -175,7 +221,8 @@ class VwapServer {
         const {
           category = null,
           vegan = null,
-          search = null
+          search = null,
+          source = null
         } = req.query;
 
         const options = {
@@ -183,7 +230,8 @@ class VwapServer {
           limit: 10000, // High limit for ingredient browser
           category,
           vegan: vegan === 'true' ? true : vegan === 'false' ? false : null,
-          search
+          search,
+          source
         };
 
         const result = await this.database.getIngredients(options);

@@ -1,0 +1,371 @@
+[
+  {
+    "name": "salt",
+    "vegan": true,
+    "category": "spices",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["seasoning", "preservation", "baking"]
+  },
+  {
+    "name": "black pepper",
+    "vegan": true,
+    "category": "spices",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["seasoning", "cooking", "marinade"]
+  },
+  {
+    "name": "garlic",
+    "vegan": true,
+    "category": "vegetables",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["cooking", "seasoning", "marinade", "sauce"]
+  },
+  {
+    "name": "onion",
+    "vegan": true,
+    "category": "vegetables",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["cooking", "sauce", "soup", "stir-fry"]
+  },
+  {
+    "name": "olive oil",
+    "vegan": true,
+    "category": "oils_fats",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["cooking", "dressing", "marinade", "baking"]
+  },
+  {
+    "name": "butter",
+    "vegan": false,
+    "category": "dairy",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["vegan butter", "coconut oil", "olive oil", "avocado oil"],
+    "common_uses": ["baking", "cooking", "spreading", "sauce"]
+  },
+  {
+    "name": "milk",
+    "vegan": false,
+    "category": "dairy",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["almond milk", "soy milk", "oat milk", "coconut milk"],
+    "common_uses": ["drinking", "cereal", "baking", "coffee"]
+  },
+  {
+    "name": "eggs",
+    "vegan": false,
+    "category": "meat",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["flax eggs", "chia eggs", "aquafaba", "applesauce"],
+    "common_uses": ["baking", "binding", "breakfast", "cooking"]
+  },
+  {
+    "name": "flour",
+    "vegan": true,
+    "category": "grains",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["baking", "thickening", "breading", "cooking"]
+  },
+  {
+    "name": "sugar",
+    "vegan": true,
+    "category": "other",
+    "confidence": 0.9,
+    "source": "curated",
+    "substitutes": ["maple syrup", "agave nectar", "coconut sugar"],
+    "common_uses": ["baking", "sweetening", "desserts", "drinks"]
+  },
+  {
+    "name": "rice",
+    "vegan": true,
+    "category": "grains",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["main dish", "side dish", "stir-fry", "soup"]
+  },
+  {
+    "name": "pasta",
+    "vegan": true,
+    "category": "grains",
+    "confidence": 0.9,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["main dish", "salad", "soup", "side dish"]
+  },
+  {
+    "name": "tomato",
+    "vegan": true,
+    "category": "vegetables",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["sauce", "salad", "cooking", "soup"]
+  },
+  {
+    "name": "lemon",
+    "vegan": true,
+    "category": "fruits",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["lime", "vinegar"],
+    "common_uses": ["seasoning", "dressing", "marinade", "baking"]
+  },
+  {
+    "name": "basil",
+    "vegan": true,
+    "category": "spices",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["oregano", "thyme"],
+    "common_uses": ["seasoning", "sauce", "pasta", "pizza"]
+  },
+  {
+    "name": "cheese",
+    "vegan": false,
+    "category": "dairy",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["nutritional yeast", "vegan cheese", "cashew cream"],
+    "common_uses": ["topping", "sauce", "snack", "cooking"]
+  },
+  {
+    "name": "chicken",
+    "vegan": false,
+    "category": "meat",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["tofu", "tempeh", "seitan", "jackfruit"],
+    "common_uses": ["main dish", "protein", "soup", "salad"]
+  },
+  {
+    "name": "beef",
+    "vegan": false,
+    "category": "meat",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["mushrooms", "lentils", "beyond meat", "impossible meat"],
+    "common_uses": ["main dish", "protein", "burgers", "stew"]
+  },
+  {
+    "name": "bread",
+    "vegan": true,
+    "category": "grains",
+    "confidence": 0.8,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["sandwich", "toast", "side dish", "breakfast"]
+  },
+  {
+    "name": "potato",
+    "vegan": true,
+    "category": "vegetables",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["side dish", "main dish", "soup", "salad"]
+  },
+  {
+    "name": "carrot",
+    "vegan": true,
+    "category": "vegetables",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["cooking", "snack", "soup", "salad"]
+  },
+  {
+    "name": "broccoli",
+    "vegan": true,
+    "category": "vegetables",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["side dish", "stir-fry", "soup", "salad"]
+  },
+  {
+    "name": "spinach",
+    "vegan": true,
+    "category": "vegetables",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["kale", "arugula"],
+    "common_uses": ["salad", "cooking", "smoothie", "soup"]
+  },
+  {
+    "name": "mushroom",
+    "vegan": true,
+    "category": "vegetables",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["cooking", "sauce", "pizza", "soup"]
+  },
+  {
+    "name": "bell pepper",
+    "vegan": true,
+    "category": "vegetables",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["cooking", "salad", "stir-fry", "roasting"]
+  },
+  {
+    "name": "coconut oil",
+    "vegan": true,
+    "category": "oils_fats",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["olive oil", "vegetable oil"],
+    "common_uses": ["cooking", "baking", "frying", "beauty"]
+  },
+  {
+    "name": "soy sauce",
+    "vegan": true,
+    "category": "other",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["tamari", "coconut aminos"],
+    "common_uses": ["seasoning", "marinade", "stir-fry", "dipping"]
+  },
+  {
+    "name": "honey",
+    "vegan": false,
+    "category": "other",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["maple syrup", "agave nectar", "date syrup"],
+    "common_uses": ["sweetening", "baking", "tea", "toast"]
+  },
+  {
+    "name": "tofu",
+    "vegan": true,
+    "category": "legumes",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["tempeh", "seitan"],
+    "common_uses": ["protein", "stir-fry", "soup", "marinade"]
+  },
+  {
+    "name": "quinoa",
+    "vegan": true,
+    "category": "grains",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["rice", "couscous"],
+    "common_uses": ["grain bowl", "salad", "side dish", "breakfast"]
+  },
+  {
+    "name": "avocado",
+    "vegan": true,
+    "category": "fruits",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["toast", "salad", "guacamole", "sandwich"]
+  },
+  {
+    "name": "banana",
+    "vegan": true,
+    "category": "fruits",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["snack", "smoothie", "baking", "breakfast"]
+  },
+  {
+    "name": "apple",
+    "vegan": true,
+    "category": "fruits",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["snack", "baking", "salad", "juice"]
+  },
+  {
+    "name": "cucumber",
+    "vegan": true,
+    "category": "vegetables",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["salad", "snack", "pickle", "water"]
+  },
+  {
+    "name": "lettuce",
+    "vegan": true,
+    "category": "vegetables",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["spinach", "kale"],
+    "common_uses": ["salad", "sandwich", "wrap", "garnish"]
+  },
+  {
+    "name": "ginger",
+    "vegan": true,
+    "category": "spices",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": [],
+    "common_uses": ["seasoning", "tea", "stir-fry", "baking"]
+  },
+  {
+    "name": "cilantro",
+    "vegan": true,
+    "category": "spices",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["parsley"],
+    "common_uses": ["garnish", "seasoning", "salsa", "curry"]
+  },
+  {
+    "name": "parsley",
+    "vegan": true,
+    "category": "spices",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["cilantro"],
+    "common_uses": ["garnish", "seasoning", "sauce", "salad"]
+  },
+  {
+    "name": "oregano",
+    "vegan": true,
+    "category": "spices",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["basil", "thyme"],
+    "common_uses": ["seasoning", "pizza", "pasta", "sauce"]
+  },
+  {
+    "name": "thyme",
+    "vegan": true,
+    "category": "spices",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["oregano", "rosemary"],
+    "common_uses": ["seasoning", "roasting", "soup", "sauce"]
+  },
+  {
+    "name": "rosemary",
+    "vegan": true,
+    "category": "spices",
+    "confidence": 1.0,
+    "source": "curated",
+    "substitutes": ["thyme", "sage"],
+    "common_uses": ["seasoning", "roasting", "bread", "potatoes"]
+  }
+]

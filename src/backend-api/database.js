@@ -204,7 +204,8 @@ class VwapDatabase {
       limit = 50, 
       category = null, 
       vegan = null, 
-      search = null 
+      search = null,
+      source = null 
     } = options;
 
     return new Promise((resolve, reject) => {
@@ -229,6 +230,12 @@ class VwapDatabase {
         sql += ' AND name LIKE ?';
         countSQL += ' AND name LIKE ?';
         params.push(`%${search.toLowerCase()}%`);
+      }
+
+      if (source) {
+        sql += ' AND source = ?';
+        countSQL += ' AND source = ?';
+        params.push(source);
       }
 
       // Add pagination
