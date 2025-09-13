@@ -1,0 +1,307 @@
+{
+  "version": "1.0",
+  "last_updated": "2025-09-13",
+  "description": "Comprehensive database of ingredients with vegan status and substitutes",
+  "ingredients": {
+    "meat_and_poultry": {
+      "beef": {
+        "vegan": false,
+        "category": "meat",
+        "substitutes": ["Beyond beef", "seitan", "mushroom crumbles", "lentil crumbles", "TVP (textured vegetable protein)"],
+        "common_uses": ["burgers", "tacos", "stew", "ground meat dishes"]
+      },
+      "chicken": {
+        "vegan": false,
+        "category": "meat",
+        "substitutes": ["chicken-style seitan", "cauliflower", "tofu", "tempeh", "jackfruit"],
+        "common_uses": ["stir-fry", "soup", "salads", "sandwiches"]
+      },
+      "pork": {
+        "vegan": false,
+        "category": "meat",
+        "substitutes": ["mushroom bacon", "tempeh bacon", "coconut bacon", "smoky tofu"],
+        "common_uses": ["bacon", "ham", "sausage", "pulled pork"]
+      },
+      "turkey": {
+        "vegan": false,
+        "category": "meat",
+        "substitutes": ["tofurky", "seitan roast", "stuffed squash", "lentil loaf"],
+        "common_uses": ["thanksgiving", "deli meat", "roasts"]
+      },
+      "lamb": {
+        "vegan": false,
+        "category": "meat",
+        "substitutes": ["seasoned mushrooms", "herb-crusted tofu", "eggplant"],
+        "common_uses": ["roasts", "stews", "mediterranean dishes"]
+      },
+      "bacon": {
+        "vegan": false,
+        "category": "meat",
+        "substitutes": ["tempeh bacon", "coconut bacon", "shiitake mushroom strips", "carrot bacon"],
+        "common_uses": ["breakfast", "BLT", "salad topping", "pasta"]
+      },
+      "sausage": {
+        "vegan": false,
+        "category": "meat",
+        "substitutes": ["plant-based sausage", "seasoned crumbled tofu", "lentil sausage"],
+        "common_uses": ["breakfast", "pizza", "pasta", "casseroles"]
+      },
+      "ham": {
+        "vegan": false,
+        "category": "meat",
+        "substitutes": ["smoky tempeh", "seasoned tofu", "jackfruit ham"],
+        "common_uses": ["sandwiches", "holiday meals", "soup"]
+      }
+    },
+    "dairy_products": {
+      "milk": {
+        "vegan": false,
+        "category": "dairy",
+        "substitutes": ["oat milk", "almond milk", "soy milk", "coconut milk", "rice milk"],
+        "common_uses": ["cereal", "coffee", "baking", "smoothies"]
+      },
+      "butter": {
+        "vegan": false,
+        "category": "dairy",
+        "substitutes": ["vegan butter", "coconut oil", "olive oil", "avocado oil"],
+        "common_uses": ["baking", "cooking", "toast", "sautéing"]
+      },
+      "cheese": {
+        "vegan": false,
+        "category": "dairy",
+        "substitutes": ["nutritional yeast", "cashew cheese", "vegan cheese", "hemp seeds"],
+        "common_uses": ["pizza", "sandwiches", "pasta", "salads"]
+      },
+      "cream": {
+        "vegan": false,
+        "category": "dairy",
+        "substitutes": ["coconut cream", "cashew cream", "oat cream", "silken tofu"],
+        "common_uses": ["coffee", "soup", "desserts", "sauces"]
+      },
+      "sour_cream": {
+        "vegan": false,
+        "category": "dairy",
+        "substitutes": ["cashew sour cream", "coconut yogurt", "tofu sour cream"],
+        "common_uses": ["tacos", "baked potatoes", "dips", "mexican food"]
+      },
+      "yogurt": {
+        "vegan": false,
+        "category": "dairy",
+        "substitutes": ["coconut yogurt", "almond yogurt", "soy yogurt", "oat yogurt"],
+        "common_uses": ["breakfast", "smoothies", "parfait", "baking"]
+      },
+      "ice_cream": {
+        "vegan": false,
+        "category": "dairy",
+        "substitutes": ["coconut ice cream", "oat ice cream", "cashew ice cream", "sorbet"],
+        "common_uses": ["dessert", "treats", "milkshakes"]
+      },
+      "whipped_cream": {
+        "vegan": false,
+        "category": "dairy",
+        "substitutes": ["coconut whipped cream", "aquafaba whipped cream", "vegan whipping cream"],
+        "common_uses": ["desserts", "coffee", "pies", "cakes"]
+      },
+      "cream_cheese": {
+        "vegan": false,
+        "category": "dairy",
+        "substitutes": ["cashew cream cheese", "tofu cream cheese", "vegan cream cheese"],
+        "common_uses": ["bagels", "cheesecake", "frosting", "dips"]
+      }
+    },
+    "eggs_and_derivatives": {
+      "eggs": {
+        "vegan": false,
+        "category": "eggs",
+        "substitutes": ["flax eggs", "chia eggs", "aquafaba", "commercial egg replacer", "applesauce"],
+        "common_uses": ["baking", "binding", "breakfast", "custards"]
+      },
+      "egg_whites": {
+        "vegan": false,
+        "category": "eggs",
+        "substitutes": ["aquafaba", "flax gel", "commercial egg white replacer"],
+        "common_uses": ["meringue", "whipping", "baking", "cocktails"]
+      },
+      "egg_yolks": {
+        "vegan": false,
+        "category": "eggs",
+        "substitutes": ["cashew cream", "silken tofu", "vegan mayo"],
+        "common_uses": ["custard", "mayo", "hollandaise", "carbonara"]
+      },
+      "mayonnaise": {
+        "vegan": false,
+        "category": "eggs",
+        "substitutes": ["vegan mayo", "avocado", "cashew mayo", "tahini"],
+        "common_uses": ["sandwiches", "salads", "dips", "dressings"]
+      }
+    },
+    "hidden_animal_ingredients": {
+      "gelatin": {
+        "vegan": false,
+        "category": "hidden",
+        "substitutes": ["agar agar", "carrageenan", "pectin", "cornstarch"],
+        "common_uses": ["jello", "gummies", "marshmallows", "thickening"]
+      },
+      "honey": {
+        "vegan": false,
+        "category": "hidden",
+        "substitutes": ["maple syrup", "agave nectar", "brown rice syrup", "date syrup"],
+        "common_uses": ["sweetening", "baking", "tea", "granola"]
+      },
+      "lard": {
+        "vegan": false,
+        "category": "hidden",
+        "substitutes": ["coconut oil", "vegan shortening", "vegetable oil"],
+        "common_uses": ["baking", "frying", "pastries"]
+      },
+      "tallow": {
+        "vegan": false,
+        "category": "hidden",
+        "substitutes": ["coconut oil", "vegetable shortening", "palm oil"],
+        "common_uses": ["frying", "baking", "soap making"]
+      },
+      "casein": {
+        "vegan": false,
+        "category": "hidden",
+        "substitutes": ["plant-based protein powder", "nutritional yeast"],
+        "common_uses": ["protein supplements", "processed foods"]
+      },
+      "whey": {
+        "vegan": false,
+        "category": "hidden",
+        "substitutes": ["plant-based protein powder", "pea protein", "rice protein"],
+        "common_uses": ["protein supplements", "baking", "processed foods"]
+      },
+      "lactose": {
+        "vegan": false,
+        "category": "hidden",
+        "substitutes": ["coconut sugar", "cane sugar", "maple sugar"],
+        "common_uses": ["sweetening", "processed foods"]
+      },
+      "albumin": {
+        "vegan": false,
+        "category": "hidden",
+        "substitutes": ["aquafaba", "flax gel", "commercial egg replacer"],
+        "common_uses": ["binding", "processed foods", "supplements"]
+      },
+      "carmine": {
+        "vegan": false,
+        "category": "hidden",
+        "substitutes": ["beet juice", "natural food coloring", "paprika extract"],
+        "common_uses": ["food coloring", "cosmetics", "red coloring"]
+      },
+      "shellac": {
+        "vegan": false,
+        "category": "hidden",
+        "substitutes": ["plant-based wax", "carnauba wax"],
+        "common_uses": ["candy coating", "pill coating", "wood finish"]
+      },
+      "isinglass": {
+        "vegan": false,
+        "category": "hidden",
+        "substitutes": ["bentonite clay", "activated charcoal", "plant-based clarifiers"],
+        "common_uses": ["beer/wine clarifying", "filtering"]
+      }
+    },
+    "seafood": {
+      "fish": {
+        "vegan": false,
+        "category": "seafood",
+        "substitutes": ["banana blossom", "hearts of palm", "tofu fish", "seaweed"],
+        "common_uses": ["fish and chips", "tacos", "sushi", "soup"]
+      },
+      "shrimp": {
+        "vegan": false,
+        "category": "seafood",
+        "substitutes": ["king oyster mushrooms", "hearts of palm", "plant-based shrimp"],
+        "common_uses": ["pasta", "stir-fry", "cocktail", "curry"]
+      },
+      "crab": {
+        "vegan": false,
+        "category": "seafood",
+        "substitutes": ["hearts of palm", "jackfruit", "mushrooms"],
+        "common_uses": ["crab cakes", "pasta", "salads", "soup"]
+      },
+      "lobster": {
+        "vegan": false,
+        "category": "seafood",
+        "substitutes": ["king oyster mushrooms", "hearts of palm", "artichoke"],
+        "common_uses": ["rolls", "bisque", "pasta", "salads"]
+      },
+      "salmon": {
+        "vegan": false,
+        "category": "seafood",
+        "substitutes": ["marinated carrots", "beet-cured tofu", "plant-based salmon"],
+        "common_uses": ["sushi", "grilling", "salads", "bagels"]
+      },
+      "tuna": {
+        "vegan": false,
+        "category": "seafood",
+        "substitutes": ["jackfruit tuna", "chickpea tuna", "hearts of palm"],
+        "common_uses": ["sandwiches", "salads", "pasta", "sushi"]
+      }
+    },
+    "commonly_vegan": {
+      "tofu": {
+        "vegan": true,
+        "category": "protein",
+        "substitutes": [],
+        "common_uses": ["stir-fry", "scrambles", "soups", "grilling"]
+      },
+      "tempeh": {
+        "vegan": true,
+        "category": "protein",
+        "substitutes": [],
+        "common_uses": ["sandwiches", "stir-fry", "bacon substitute"]
+      },
+      "seitan": {
+        "vegan": true,
+        "category": "protein",
+        "substitutes": [],
+        "common_uses": ["meat substitute", "stews", "sandwiches"]
+      },
+      "nutritional_yeast": {
+        "vegan": true,
+        "category": "flavor",
+        "substitutes": [],
+        "common_uses": ["cheese flavor", "pasta", "popcorn", "sauces"]
+      },
+      "coconut_milk": {
+        "vegan": true,
+        "category": "dairy_alternative",
+        "substitutes": [],
+        "common_uses": ["curry", "desserts", "coffee", "smoothies"]
+      },
+      "almond_milk": {
+        "vegan": true,
+        "category": "dairy_alternative",
+        "substitutes": [],
+        "common_uses": ["cereal", "coffee", "baking", "smoothies"]
+      },
+      "olive_oil": {
+        "vegan": true,
+        "category": "fat",
+        "substitutes": [],
+        "common_uses": ["cooking", "salads", "drizzling", "baking"]
+      },
+      "coconut_oil": {
+        "vegan": true,
+        "category": "fat",
+        "substitutes": [],
+        "common_uses": ["baking", "frying", "butter substitute"]
+      },
+      "avocado": {
+        "vegan": true,
+        "category": "fat",
+        "substitutes": [],
+        "common_uses": ["toast", "salads", "guacamole", "smoothies"]
+      },
+      "quinoa": {
+        "vegan": true,
+        "category": "grain",
+        "substitutes": [],
+        "common_uses": ["salads", "bowls", "side dishes", "breakfast"]
+      }
+    }
+  }
+}

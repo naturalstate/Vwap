@@ -1,122 +1,110 @@
-# Vwap - Vegan Recipe Swap
+# 🌱 Vwap - Recipe Veganizer
 
-A community-driven platform for sharing, discovering, and swapping delicious vegan recipes.
+**Transform any recipe into a delicious vegan version instantly!**
 
-## Overview
+Vwap (Vegan Recipe Adapter) is a simple, powerful web tool that automatically converts traditional recipes to be 100% vegan-friendly by intelligently replacing non-vegan ingredients with perfect plant-based alternatives.
 
-Vwap (Vegan Recipe Swap) is an application designed to connect vegan cooking enthusiasts by providing a platform to:
-- Share favorite vegan recipes
-- Discover new plant-based dishes
-- Swap recipes with other community members
-- Rate and review recipes
-- Build a personal recipe collection
+## ✨ Features
 
-## Features
+- 🔄 **Intelligent Substitution** - Automatically replaces dairy, eggs, meat, and hidden animal ingredients
+- 📋 **Clear Change Summary** - Shows exactly what was substituted with alternative options
+- 🗄️ **Comprehensive Database** - Powered by 70+ ingredient mappings (expanding to 10K+)
+- 📱 **Mobile Responsive** - Works perfectly on phones, tablets, and desktop
+- ⚡ **Instant Results** - No account needed, just paste and convert
+- 🎨 **Beautiful UI** - Clean, intuitive interface built with Material-UI
 
-### Core Features (Planned)
-- **Recipe Management**: Add, edit, and organize your personal vegan recipes
-- **Recipe Discovery**: Browse and search through community-shared recipes
-- **Recipe Swapping**: Trade recipes with other users
-- **User Profiles**: Create profiles to showcase your favorite recipes and cooking style
-- **Rating & Reviews**: Rate recipes and leave helpful cooking tips
-- **Categories & Tags**: Organize recipes by meal type, cuisine, dietary restrictions, etc.
-- **Shopping Lists**: Generate shopping lists from selected recipes
+## 🚀 How It Works
 
-### Advanced Features (Future)
-- **Meal Planning**: Plan weekly vegan meals using saved recipes
-- **Nutritional Information**: Display nutritional content of recipes
-- **Social Features**: Follow other users, create cooking groups
-- **Recipe Import**: Import recipes from popular cooking websites
-- **Mobile App**: Native mobile applications for iOS and Android
+1. **Paste Recipe** - Copy any recipe text or URL from your favorite site
+2. **Auto-Convert** - Our intelligent system identifies and replaces non-vegan ingredients
+3. **Cook & Enjoy** - Get your perfectly converted vegan recipe with substitution notes
 
-## Technology Stack
+## 🏗️ Project Structure
 
-- **Backend**: Python/Flask or Node.js/Express
-- **Database**: PostgreSQL or MongoDB
-- **Frontend**: React.js or Vue.js
-- **Authentication**: JWT-based authentication
-- **Deployment**: Docker containers, AWS/Heroku
+```
+src/
+├── frontend/              # React application
+│   ├── src/              # React components and logic
+│   ├── public/           # Static assets
+│   ├── build/            # Production build
+│   ├── ingredient_database.json     # Current ingredient database
+│   ├── ingredient_browser.html      # Admin database browser
+│   └── serve_local.py              # Local development server
+├── backend-api/          # Node.js/Express API (in development)
+└── shared/               # Shared utilities and data
+```
 
-## Getting Started
+## 🛠️ Tech Stack
+
+### Frontend
+- **React** - Modern UI framework
+- **Material-UI** - Beautiful, accessible components
+- **JavaScript ES6+** - Modern language features
+
+### Backend (In Development)
+- **Node.js/Express** - Scalable API server
+- **SQLite** - Fast, lightweight database
+- **OpenFoodFacts** - Ingredient data source
+
+## 🚦 Getting Started
 
 ### Prerequisites
-- Python 3.8+ (if using Python backend)
-- Node.js 14+ (if using Node.js backend)
-- Database (PostgreSQL/MongoDB)
-- Git
+- Node.js 16+
+- npm or yarn
 
-### Installation
-
-1. Clone the repository:
+### Frontend Development
 ```bash
-git clone https://github.com/your-username/vegan-recipe-swap.git
-cd vegan-recipe-swap
-```
-
-2. Install dependencies:
-```bash
-# For Python backend
-pip install -r requirements.txt
-
-# For Node.js backend
+cd src/frontend
 npm install
+npm start
 ```
+Visit `http://localhost:3000`
 
-3. Set up environment variables:
+### Production Build
 ```bash
-cp .env.example .env
-# Edit .env with your configuration
+npm run build
+python serve_local.py  # Serves on local network
 ```
 
-4. Initialize the database:
-```bash
-# Instructions will be added based on chosen database
-```
+## 🎯 Current Status
 
-5. Run the application:
-```bash
-# Development mode
-npm run dev
-# or
-python app.py
-```
+### ✅ Completed
+- Beautiful React frontend with substitution summary panel
+- 70-ingredient database with intelligent matching
+- Mobile-responsive design
+- Local network serving capability
+- Admin ingredient browser interface
 
-## Project Structure
+### 🚧 In Development
+- Massive ingredient database expansion (10K+ ingredients)
+- Node.js/Express backend API
+- URL recipe extraction feature
+- Enhanced substitution intelligence
 
-```
-vegan-recipe-swap/
-├── src/                    # Source code
-│   ├── backend/           # Backend API
-│   ├── frontend/          # Frontend application
-│   └── shared/            # Shared utilities
-├── docs/                  # Documentation
-├── tests/                 # Test files
-├── scripts/               # Build and deployment scripts
-├── docker/                # Docker configuration
-├── README.md
-├── TODO.md               # Project tasks and features
-└── requirements.txt      # Dependencies
-```
+## 🤝 Contributing
 
-## Contributing
+This project is in active development. We welcome contributions for:
+- Additional ingredient mappings
+- UI/UX improvements
+- Backend API development
+- Recipe extraction algorithms
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+## 📝 Common Substitutions
 
-## License
+Our intelligent system automatically handles:
+- **Milk** → Oat, Almond, or Soy Milk
+- **Butter** → Vegan Butter or Coconut Oil
+- **Eggs** → Flax Eggs or Aquafaba
+- **Cheese** → Nutritional Yeast or Vegan Cheese
+- **Meat** → Tofu, Tempeh, or Mushrooms
+- **Honey** → Maple Syrup or Agave Nectar
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+...and many more!
 
-## Roadmap
+## 🌟 Vision
 
-See [TODO.md](TODO.md) for detailed project roadmap and current development status.
+Making vegan cooking accessible to everyone by removing the guesswork from ingredient substitutions. Whether you're a new vegan, experienced cook, or cooking for loved ones, Vwap makes plant-based cooking simple and delicious.
 
-## Contact
-
-For questions or suggestions, please open an issue or contact the maintainers.
 
 ---
 
