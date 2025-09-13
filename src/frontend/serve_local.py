@@ -10,7 +10,7 @@ import socket
 import os
 
 # Configuration
-PORT = 8080
+PORT = 8000
 BUILD_DIR = "build"
 
 class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):

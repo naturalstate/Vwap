@@ -3,7 +3,7 @@
  * Handles all communication with the backend API server
  */
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://10.5.0.2:3001';
 
 class ApiService {
   constructor() {
