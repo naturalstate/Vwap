@@ -396,8 +396,8 @@
 
         async function loadDatabase() {
             try {
-                // Try to load from the backend API first
-                const response = await fetch('http://localhost:3001/api/ingredients');
+                // Try to load from the backend API first (request all ingredients)
+                const response = await fetch('http://10.5.0.2:3001/api/ingredients/all');
                 if (response.ok) {
                     const apiData = await response.json();
                     if (apiData.success && apiData.ingredients) {
@@ -437,7 +437,7 @@
             } catch (error) {
                 console.error('Error loading database:', error);
                 document.getElementById('loading').innerHTML = 
-                    '❌ Error loading database. Make sure the backend API is running on <code>http://localhost:3001</code> or <code>ingredient_database.json</code> is available in the same directory.';
+                    '❌ Error loading database. Make sure the backend API is running on <code>http://10.5.0.2:3001</code> or <code>ingredient_database.json</code> is available in the same directory.';
             }
         }
 

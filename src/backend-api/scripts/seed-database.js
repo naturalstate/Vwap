@@ -78,43 +78,88 @@ class DatabaseSeeder {
   async seedFromOpenFoodFacts() {
     console.log('\n🥫 Processing OpenFoodFacts data...');
     
-    try {
-      const openFoodFactsPath = path.join(__dirname, '../../../openfoodfacts_sample.json');
-      const extractedIngredients = await this.parser.parseOpenFoodFacts(openFoodFactsPath);
-      
-      if (extractedIngredients.length > 0) {
-        // Filter out ingredients with very low confidence
-        const qualityIngredients = extractedIngredients.filter(ing => 
-          ing.confidence >= 0.3 && 
-          ing.name.length >= 3 &&
-          ing.name.length <= 30 // Avoid parsing errors with super long names
-        );
+    // List of all our downloaded JSON files
+    const openFoodFactsFiles = [
+      'openfoodfacts_combined.json', // Our combined 5000 products file
+      'openfoodfacts_sample.json' // Keep the original as fallback
+    ];
+    
+    let allExtractedIngredients = [];
+    let totalProductsProcessed = 0;
+    
+    for (const fileName of openFoodFactsFiles) {
+      try {
+        const filePath = path.join(__dirname, '../../../', fileName);
         
-        console.log(`🔍 Filtered ${qualityIngredients.length} quality ingredients from ${extractedIngredients.length} total`);
+        // Check if file exists
+        if (!require('fs').existsSync(filePath)) {
+          console.log(`⏭️  Skipping ${fileName} (file not found)`);
+          continue;
+        }
         
-        if (qualityIngredients.length > 0) {
-          // Insert in batches to avoid memory issues
-          const batchSize = 1000;
-          let totalInserted = 0;
-          let totalErrors = 0;
-          
-          for (let i = 0; i < qualityIngredients.length; i += batchSize) {
-            const batch = qualityIngredients.slice(i, i + batchSize);
-            const result = await this.database.bulkInsertIngredients(batch);
-            
-            totalInserted += result.inserted;
-            totalErrors += result.errors;
-            
-            console.log(`  📦 Batch ${Math.floor(i / batchSize) + 1}: ${result.inserted} inserted, ${result.errors} errors`);
-          }
-          
-          console.log(`✅ Total OpenFoodFacts: ${totalInserted} inserted, ${totalErrors} errors`);
+        console.log(`📁 Processing ${fileName}...`);
+        const extractedIngredients = await this.parser.parseOpenFoodFacts(filePath);
+        
+        if (extractedIngredients.length > 0) {
+          allExtractedIngredients = allExtractedIngredients.concat(extractedIngredients);
+          totalProductsProcessed += extractedIngredients.length;
+          console.log(`   ✅ Extracted ${extractedIngredients.length} ingredients`);
+        } else {
+          console.log(`   ⚠️  No ingredients found in ${fileName}`);
+        }
+        
+      } catch (error) {
+        console.log(`   ❌ Error processing ${fileName}:`, error.message);
+      }
+    }
+    
+    console.log(`\n📊 Total ingredients extracted from all files: ${allExtractedIngredients.length}`);
+    
+    if (allExtractedIngredients.length > 0) {
+      // Remove duplicates by name (keep highest confidence)
+      const uniqueIngredients = new Map();
+      for (const ingredient of allExtractedIngredients) {
+        const key = ingredient.name;
+        if (!uniqueIngredients.has(key) || uniqueIngredients.get(key).confidence < ingredient.confidence) {
+          uniqueIngredients.set(key, ingredient);
         }
       }
       
-    } catch (error) {
-      console.log('⚠️  Could not process OpenFoodFacts data:', error.message);
-      console.log('   Run the download command first: curl "https://world.openfoodfacts.org/..."');
+      const deduplicatedIngredients = Array.from(uniqueIngredients.values());
+      console.log(`🔍 After deduplication: ${deduplicatedIngredients.length} unique ingredients`);
+      
+      // Filter out ingredients with very low confidence
+      const qualityIngredients = deduplicatedIngredients.filter(ing => 
+        ing.confidence >= 0.3 && 
+        ing.name.length >= 3 &&
+        ing.name.length <= 50 // Increased limit for compound ingredient names
+      );
+      
+      console.log(`🔍 After quality filtering: ${qualityIngredients.length} high-quality ingredients`);
+      
+      if (qualityIngredients.length > 0) {
+        // Insert in batches to avoid memory issues
+        const batchSize = 500; // Smaller batches for stability
+        let totalInserted = 0;
+        let totalErrors = 0;
+        
+        for (let i = 0; i < qualityIngredients.length; i += batchSize) {
+          const batch = qualityIngredients.slice(i, i + batchSize);
+          const result = await this.database.bulkInsertIngredients(batch);
+          
+          totalInserted += result.inserted;
+          totalErrors += result.errors;
+          
+          console.log(`  📦 Batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(qualityIngredients.length / batchSize)}: ${result.inserted} inserted, ${result.errors} errors`);
+          
+          // Small delay between batches
+          await new Promise(resolve => setTimeout(resolve, 100));
+        }
+        
+        console.log(`✅ Total OpenFoodFacts: ${totalInserted} inserted, ${totalErrors} errors`);
+      }
+    } else {
+      console.log('⚠️  No OpenFoodFacts data found. Make sure to download the data files first.');
     }
   }
 

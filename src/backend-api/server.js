@@ -169,6 +169,40 @@ class VwapServer {
       }
     });
 
+    // Get all ingredients (for ingredient browser - no pagination limit)
+    this.app.get('/api/ingredients/all', async (req, res) => {
+      try {
+        const {
+          category = null,
+          vegan = null,
+          search = null
+        } = req.query;
+
+        const options = {
+          page: 1,
+          limit: 10000, // High limit for ingredient browser
+          category,
+          vegan: vegan === 'true' ? true : vegan === 'false' ? false : null,
+          search
+        };
+
+        const result = await this.database.getIngredients(options);
+        
+        res.json({
+          success: true,
+          ingredients: result.ingredients,
+          total: result.total
+        });
+        
+      } catch (error) {
+        console.error('❌ Error fetching all ingredients:', error);
+        res.status(500).json({
+          error: 'Failed to fetch all ingredients',
+          message: error.message
+        });
+      }
+    });
+
     // Get database statistics
     this.app.get('/api/stats', async (req, res) => {
       try {
