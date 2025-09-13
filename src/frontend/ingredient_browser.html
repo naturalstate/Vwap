@@ -247,6 +247,63 @@
             color: #666;
         }
 
+        /* Pagination Styles */
+        .pagination-info {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .pagination button {
+            padding: 8px 16px;
+            font-size: 14px;
+            min-width: auto;
+        }
+
+        .pagination button:disabled {
+            background: #ddd;
+            color: #999;
+            cursor: not-allowed;
+            border-color: #ddd;
+        }
+
+        .pagination button:disabled:hover {
+            background: #ddd;
+            border-color: #ddd;
+        }
+
+        .page-numbers {
+            display: flex;
+            gap: 5px;
+        }
+
+        .page-numbers button {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        .page-numbers button.active {
+            background: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .page-numbers button.active:hover {
+            background: #45a049;
+        }
+
         @media (max-width: 768px) {
             .ingredients-grid {
                 grid-template-columns: 1fr;
@@ -310,7 +367,21 @@
         </div>
 
         <div class="loading" id="loading">Loading ingredient database...</div>
+        
+        <!-- Pagination Controls -->
+        <div class="pagination-info" id="paginationInfo" style="display: none;">
+            <p>Showing <span id="currentRange"></span> of <span id="totalResults"></span> ingredients</p>
+        </div>
+        
         <div class="ingredients-grid" id="ingredientsGrid" style="display: none;"></div>
+        
+        <!-- Pagination Navigation -->
+        <div class="pagination" id="pagination" style="display: none;">
+            <button id="prevPage" onclick="changePage(currentPage - 1)" disabled>← Previous</button>
+            <div class="page-numbers" id="pageNumbers"></div>
+            <button id="nextPage" onclick="changePage(currentPage + 1)" disabled>Next →</button>
+        </div>
+        
         <div class="no-results" id="noResults" style="display: none;">
             No ingredients found matching your search criteria.
         </div>
@@ -320,6 +391,8 @@
         let ingredientDatabase = null;
         let allIngredients = [];
         let filteredIngredients = [];
+        let currentPage = 1;
+        let itemsPerPage = 24; // Show 24 ingredients per page (4x6 grid)
 
         async function loadDatabase() {
             try {
@@ -411,17 +484,42 @@
         function renderIngredients() {
             const grid = document.getElementById('ingredientsGrid');
             const noResults = document.getElementById('noResults');
+            const paginationInfo = document.getElementById('paginationInfo');
+            const pagination = document.getElementById('pagination');
             
             if (filteredIngredients.length === 0) {
                 grid.style.display = 'none';
                 noResults.style.display = 'block';
+                paginationInfo.style.display = 'none';
+                pagination.style.display = 'none';
                 return;
+            }
+
+            // Show pagination if more than itemsPerPage ingredients
+            const showPagination = filteredIngredients.length > itemsPerPage;
+            
+            // Calculate pagination
+            const totalPages = Math.ceil(filteredIngredients.length / itemsPerPage);
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, filteredIngredients.length);
+            const pageIngredients = filteredIngredients.slice(startIndex, endIndex);
+
+            // Update pagination info
+            if (showPagination) {
+                document.getElementById('currentRange').textContent = `${startIndex + 1}-${endIndex}`;
+                document.getElementById('totalResults').textContent = filteredIngredients.length;
+                paginationInfo.style.display = 'block';
+                pagination.style.display = 'flex';
+                updatePaginationControls(totalPages);
+            } else {
+                paginationInfo.style.display = 'none';
+                pagination.style.display = 'none';
             }
 
             grid.style.display = 'grid';
             noResults.style.display = 'none';
             
-            grid.innerHTML = filteredIngredients.map(ingredient => `
+            grid.innerHTML = pageIngredients.map(ingredient => `
                 <div class="ingredient-card">
                     <div class="ingredient-header">
                         <h3 class="ingredient-name">${ingredient.name}</h3>
@@ -456,6 +554,80 @@
             `).join('');
         }
 
+        function updatePaginationControls(totalPages) {
+            const pageNumbers = document.getElementById('pageNumbers');
+            const prevButton = document.getElementById('prevPage');
+            const nextButton = document.getElementById('nextPage');
+
+            // Update prev/next buttons
+            prevButton.disabled = currentPage <= 1;
+            nextButton.disabled = currentPage >= totalPages;
+
+            // Generate page numbers (show max 7 pages)
+            pageNumbers.innerHTML = '';
+            const maxVisiblePages = 7;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            // Adjust start if we're near the end
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+
+            // Add first page and ellipsis if needed
+            if (startPage > 1) {
+                const firstButton = document.createElement('button');
+                firstButton.textContent = '1';
+                firstButton.onclick = () => changePage(1);
+                pageNumbers.appendChild(firstButton);
+                
+                if (startPage > 2) {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.textContent = '...';
+                    ellipsis.style.padding = '0 8px';
+                    ellipsis.style.color = '#666';
+                    pageNumbers.appendChild(ellipsis);
+                }
+            }
+
+            // Add page number buttons
+            for (let i = startPage; i <= endPage; i++) {
+                const button = document.createElement('button');
+                button.textContent = i;
+                button.onclick = () => changePage(i);
+                if (i === currentPage) {
+                    button.classList.add('active');
+                }
+                pageNumbers.appendChild(button);
+            }
+
+            // Add ellipsis and last page if needed
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.textContent = '...';
+                    ellipsis.style.padding = '0 8px';
+                    ellipsis.style.color = '#666';
+                    pageNumbers.appendChild(ellipsis);
+                }
+                
+                const lastButton = document.createElement('button');
+                lastButton.textContent = totalPages;
+                lastButton.onclick = () => changePage(totalPages);
+                pageNumbers.appendChild(lastButton);
+            }
+        }
+
+        function changePage(newPage) {
+            const totalPages = Math.ceil(filteredIngredients.length / itemsPerPage);
+            if (newPage >= 1 && newPage <= totalPages) {
+                currentPage = newPage;
+                renderIngredients();
+                // Scroll to top of ingredients grid
+                document.getElementById('ingredientsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
         function filterIngredients() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const categoryFilter = document.getElementById('categoryFilter').value;
@@ -475,6 +647,8 @@
                 return matchesSearch && matchesCategory && matchesVegan;
             });
 
+            // Reset to first page when filtering
+            currentPage = 1;
             renderIngredients();
         }
 
@@ -483,6 +657,7 @@
             document.getElementById('categoryFilter').value = '';
             document.getElementById('veganFilter').value = '';
             filteredIngredients = [...allIngredients];
+            currentPage = 1;
             renderIngredients();
         }
 
