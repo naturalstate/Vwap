@@ -45,6 +45,7 @@ ENV/
 *.sqlite3
 *.sql
 database/
+backups/
 
 # Uploads and media files
 uploads/
@@ -186,3 +187,9 @@ dmypy.json
 # Backup files
 *.bak
 *.backup
+
+# OpenFoodFacts data files (too large for Git)
+*_multi.json
+*_products.json
+*_large.json
+openfoodfacts_*.json

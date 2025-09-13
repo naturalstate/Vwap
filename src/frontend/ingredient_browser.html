@@ -323,6 +323,36 @@
 
         async function loadDatabase() {
             try {
+                // Try to load from the backend API first
+                const response = await fetch('http://localhost:3001/api/ingredients');
+                if (response.ok) {
+                    const apiData = await response.json();
+                    if (apiData.success && apiData.ingredients) {
+                        // Convert API format to browser format
+                        allIngredients = apiData.ingredients.map(ingredient => ({
+                            key: ingredient.name.replace(/ /g, '_'),
+                            name: ingredient.name,
+                            categoryKey: ingredient.category,
+                            categoryName: ingredient.category.toUpperCase(),
+                            vegan: Boolean(ingredient.vegan),
+                            substitutes: ingredient.substitutes || [],
+                            common_uses: ingredient.common_uses || []
+                        }));
+                        filteredIngredients = [...allIngredients];
+                        updateStats();
+                        populateCategoryFilter();
+                        renderIngredients();
+                        document.getElementById('loading').style.display = 'none';
+                        document.getElementById('ingredientsGrid').style.display = 'grid';
+                        return;
+                    }
+                }
+            } catch (error) {
+                console.warn('Backend API not available, falling back to JSON file:', error);
+            }
+
+            // Fallback to static JSON file
+            try {
                 const response = await fetch('ingredient_database.json');
                 ingredientDatabase = await response.json();
                 processDatabase();
@@ -334,9 +364,10 @@
             } catch (error) {
                 console.error('Error loading database:', error);
                 document.getElementById('loading').innerHTML = 
-                    'Error loading database. Make sure ingredient_database.json is in the same directory.';
+                    '❌ Error loading database. Make sure the backend API is running on <code>http://localhost:3001</code> or <code>ingredient_database.json</code> is available in the same directory.';
             }
         }
+
 
         function processDatabase() {
             allIngredients = [];

@@ -28,96 +28,65 @@ import {
   CheckCircle,
 } from '@mui/icons-material';
 
+// API Service
+import apiService from '../services/apiService';
+
 const HomePage = () => {
   const [inputText, setInputText] = useState('');
   const [veganizedRecipe, setVeganizedRecipe] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [ingredientDatabase, setIngredientDatabase] = useState(null);
   const [substitutions, setSubstitutions] = useState([]);
+  const [serverConnected, setServerConnected] = useState(false);
 
-  // Load ingredient database on component mount
+  // Check server connection on component mount
   useEffect(() => {
-    loadIngredientDatabase();
+    checkServerConnection();
   }, []);
 
-  const loadIngredientDatabase = async () => {
+  const checkServerConnection = async () => {
     try {
-      const response = await fetch('/ingredient_database.json');
-      const data = await response.json();
-      setIngredientDatabase(data);
+      await apiService.healthCheck();
+      setServerConnected(true);
     } catch (error) {
-      console.error('Failed to load ingredient database:', error);
+      console.error('Server connection check failed:', error);
+      setServerConnected(false);
     }
   };
 
-  // Intelligent veganization function using ingredient database
+  // Veganization function using backend API
   const veganizeRecipe = async (recipeText) => {
     setIsLoading(true);
     setError('');
+    setSubstitutions([]);
     
     try {
-      if (!ingredientDatabase) {
-        throw new Error('Ingredient database not loaded');
-      }
-
-      // Simulate processing delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Call the backend API to veganize the recipe
+      const result = await apiService.veganizeRecipe(recipeText);
       
-      let veganized = recipeText;
-      const foundSubstitutions = [];
-      
-      // Process all non-vegan ingredients from database
-      for (const [categoryKey, categoryData] of Object.entries(ingredientDatabase.ingredients)) {
-        for (const [ingredientKey, ingredientData] of Object.entries(categoryData)) {
-          if (!ingredientData.vegan && ingredientData.substitutes.length > 0) {
-            // Create regex pattern for ingredient (handle variations)
-            const ingredientName = ingredientKey.replace(/_/g, ' ');
-            const patterns = [
-              // Exact match
-              new RegExp(`\\b${ingredientName}\\b`, 'gi'),
-              // Plural forms
-              new RegExp(`\\b${ingredientName}s\\b`, 'gi'),
-              // Handle compound words (e.g., "sour_cream" -> "sour cream")
-              ...ingredientName.split(' ').length > 1 ? 
-                [new RegExp(`\\b${ingredientName.replace(/ /g, '\\s+')}\\b`, 'gi')] : []
-            ];
-            
-            patterns.forEach(pattern => {
-              if (pattern.test(veganized)) {
-                // Get best substitute (first one in the list)
-                const bestSubstitute = ingredientData.substitutes[0];
-                const oldText = veganized;
-                veganized = veganized.replace(pattern, bestSubstitute);
-                
-                if (oldText !== veganized) {
-                  foundSubstitutions.push({
-                    from: ingredientName,
-                    to: bestSubstitute,
-                    alternatives: ingredientData.substitutes.slice(1)
-                  });
-                }
-              }
-            });
-          }
+      if (result.success) {
+        // Set the veganized recipe
+        setVeganizedRecipe(result.veganizedRecipe);
+        
+        // Set the substitutions for the UI
+        if (result.substitutions && result.substitutions.length > 0) {
+          setSubstitutions(result.substitutions);
         }
-      }
-      
-      // Store substitutions in state
-      setSubstitutions(foundSubstitutions);
-      
-      // Format the recipe output (cleaner, without substitution details)
-      if (foundSubstitutions.length > 0) {
-        const output = "🌱 **Vegan Version:**\n\n" + veganized + 
-                      "\n\n💡 **Tip:** Check the substitution summary below for details about what was changed and alternative options.";
-        setVeganizedRecipe(output);
       } else {
-        setVeganizedRecipe("🌱 **Great news!** This recipe appears to already be vegan-friendly!\n\n" + veganized);
+        throw new Error('API returned unsuccessful result');
       }
       
     } catch (err) {
       console.error('Veganization error:', err);
-      setError('Sorry, there was an error processing your recipe. Please try again.');
+      const errorMessage = err.message || 'Sorry, there was an error processing your recipe. Please try again.';
+      
+      // Check if it's a connection error
+      if (errorMessage.includes('Unable to connect')) {
+        setError(`${errorMessage} Make sure the backend server is running on http://localhost:3001`);
+        setServerConnected(false);
+      } else {
+        setError(errorMessage);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -164,6 +133,22 @@ const HomePage = () => {
           </Box>
         </Container>
       </Box>
+
+      {/* Server Connection Status */}
+      {!serverConnected && (
+        <Container maxWidth="lg" sx={{ pt: 4, pb: 2 }}>
+          <Alert severity="warning" sx={{ mb: 2 }}>
+            ⚠️ Backend server not connected. Please ensure the API server is running on http://localhost:3001
+            <Button 
+              onClick={checkServerConnection} 
+              size="small" 
+              sx={{ ml: 2 }}
+            >
+              Retry Connection
+            </Button>
+          </Alert>
+        </Container>
+      )}
 
       {/* Main Tool Section */}
       <Container maxWidth="lg" sx={{ py: 6 }}>

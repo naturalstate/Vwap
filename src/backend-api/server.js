@@ -34,10 +34,11 @@ class VwapServer {
     this.app.use(helmet());
     this.app.use(compression());
     
-    // CORS configuration for React frontend
+    // CORS configuration - allow all origins for development
     this.app.use(cors({
-      origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-      credentials: true
+      origin: '*', // Allow all origins for development
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization']
     }));
     
     // Body parsing
